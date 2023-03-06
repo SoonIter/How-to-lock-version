@@ -65,13 +65,10 @@
 // package.json
 "overrides": {
   ❌ "react>loose-envify>js-tokens": "1.0.0"
+  
+  ✅ "react>loose-envify": "1.1.0",
+     "loose-envify>js-tokens": "1.1.0",
 }
-```
-```yaml
-# pnpm-lock.yaml
-  /react/18.2.0:
-    dependencies:
-      loose-envify: 1.0.0
 ```
 
 .pnpmfile.cjs 同理, 不过它比 overrides 更加灵活
