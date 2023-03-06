@@ -4,7 +4,7 @@
 
 ## 子workspace 的直接依赖
 
-直接依赖直接通过 package.json 声明，确定某一版本，无需使用 pnpm 的 hack 功能
+直接依赖直接通过 package.json 声明，确定某一版本，无需使用任何 hack
 
 如 某个子 workspace 确定 react 的版本为
 
@@ -47,13 +47,13 @@
 
 **2. `"react>loose-envify": "1.0.0"`**
 
-等价为 `react@*>loose-envify`
+=== `react@*>loose-envify`
 
 在 `"react@**"`(所有react版本，react@16 react@17 react@18等) 的 `package.json` 覆写 `loose-envify` 的版本为 1.0.0，无论 "dependencies" 还是 "devDependencies"，还是 react@16 react@17 react@18
 
 **3. `"loose-envify": "1.0.0"`**
 
-等价为 `*>loose-envify`
+=== `*>loose-envify`
 
 在 所有包的 `package.json` 覆写`loose-envify` 的版本为 1.0.0，包括所有的子 workspace
 (常用于整个 monorepo 某个包确定唯一版本)
