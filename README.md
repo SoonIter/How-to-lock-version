@@ -1,6 +1,8 @@
 # how to lock version ?
 
-锁依赖：某一依赖使用某一确定的版本，分为 "子workspace的直接依赖" 和 "第三方包的直接依赖"
+# 依赖层面
+
+pnpm 里锁依赖：某一依赖使用某一确定的版本，分为 "子workspace的直接依赖" 和 "第三方包的直接依赖"
 
 ## 子workspace 的直接依赖
 
@@ -31,9 +33,9 @@
 {
   "pnpm": {
     "overrides": {
-      "react@18.2.0>loose-envify": "1.0.0",
-      "react>loose-envify": "1.0.0",
-      "loose-envify": "1.0.0"
+      "react@18.2.0>loose-envify": "1.0.0", // 1
+      "react>loose-envify": "1.0.0",        // 2
+      "loose-envify": "1.0.0"               // 3
     }
   }
 }
@@ -43,17 +45,17 @@
 **1. `"react@18.2.0>loose-envify": "1.0.0"`**
 
 
-在 `"react@18.2.0"` 的 `package.json`，改写 `loose-envify` 的版本为 `1.0.0`，无论 "dependencies" 还是 "devDependencies"
+在 `"react@18.2.0"` 的 `package.json`，改写 `loose-envify` 的版本为 1.0.0，无论 "dependencies" 还是 "devDependencies"
 
 **2. `"react>loose-envify": "1.0.0"`**
 
-=== `react@*>loose-envify`
+`react@*>loose-envify`
 
-在 `"react@**"`(所有react版本，react@16 react@17 react@18等) 的 `package.json` 覆写 `loose-envify` 的版本为 1.0.0，无论 "dependencies" 还是 "devDependencies"，还是 react@16 react@17 react@18
+在 `"react@*"`(所有react版本，react@16 react@17 react@18等) 的 `package.json` 覆写 `loose-envify` 的版本为 1.0.0
 
 **3. `"loose-envify": "1.0.0"`**
 
-=== `*>loose-envify`
+`*>loose-envify`
 
 在 所有包的 `package.json` 覆写`loose-envify` 的版本为 1.0.0，包括所有的子 workspace
 (常用于整个 monorepo 某个包确定唯一版本)
@@ -90,6 +92,44 @@ function readPackage(pkg, context) {
 module.exports = {
   hooks: {
     readPackage,
+  },
+};
+```
+
+# 构建层面
+
+依赖层面无法解决子 workspace 维度的锁依赖问题，但是子项目里一个任意规定 resolve 逻辑的 bundler 可以为所欲为
+
+## resolve.alias
+
+一个包只有一个版本
+
+常用于 子项目维度
+
+因此常被用于解决 react 单例，合并版本减小包体
+
+```json5
+{
+  "name": "c",
+  "dependencies": {
+    "react": "18.2.0",
+    "@babel/runtime": "7.21.0"
+  },
+  "license": "MIT"
+}
+```
+
+
+```js
+const path = require('path');
+
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      "@babel/runtime": path.resolve(__dirname, 'node_modules', '@babel/runtime'),
+      "react": path.resolve(__dirname, 'node_modules', 'react'),
+    },
   },
 };
 ```
