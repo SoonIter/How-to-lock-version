@@ -1,0 +1,19 @@
+{
+  "name": "pnpm-demo",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "pnpm@7.26.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "pnpm": {
+    "overrides": {
+      "loose-envify": "1.0.0"
+    }
+  }
+}

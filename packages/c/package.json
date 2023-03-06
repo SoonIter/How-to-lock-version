@@ -1,0 +1,13 @@
+{
+  "name": "c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "react": "18.2.0",
+    "loose-envify": "1.4.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
