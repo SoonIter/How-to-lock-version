@@ -9,8 +9,11 @@
 如 某个子 workspace 确定 react 的版本为
 
 ```json
-"dependencies": {
-  "react": "18.2.0"
+{
+  "name": "a",
+  "dependencies": {
+    "react": "18.2.0"
+  }
 }
 ```
 
@@ -64,10 +67,10 @@
 ```json
 // package.json
 "overrides": {
-  ❌ "react>loose-envify>js-tokens": "1.0.0"
+  "react>loose-envify>js-tokens": "8.0.0", // ❌
   
-  ✅ "react>loose-envify": "1.1.0",
-     "loose-envify>js-tokens": "1.1.0",
+  "react>loose-envify": "1.1.0",           // ✅
+  "loose-envify@1.1.0>js-tokens": "8.0.0",
 }
 ```
 
