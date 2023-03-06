@@ -40,18 +40,18 @@
 ```
 
 
-1. `"react@18.2.0>loose-envify": "1.0.0"` 
+**1. `"react@18.2.0>loose-envify": "1.0.0"`**
 
 
 在 `"react@18.2.0"` 的 `package.json`，改写 `loose-envify` 的版本为 `1.0.0`，无论 "dependencies" 还是 "devDependencies"
 
-2. `"react>loose-envify": "1.0.0"`
+**2. `"react>loose-envify": "1.0.0"`**
 
 等价为 `react@*>loose-envify`
 
 在 `"react@**"`(所有react版本，react@16 react@17 react@18等) 的 `package.json` 覆写 `loose-envify` 的版本为 1.0.0，无论 "dependencies" 还是 "devDependencies"，还是 react@16 react@17 react@18
 
-3. `"loose-envify": "1.0.0"` 
+**3. `"loose-envify": "1.0.0"`**
 
 等价为 `*>loose-envify`
 
@@ -60,9 +60,9 @@
 
 **但需要注意的是不存在 `a>b>c` 这种形式**
 
-由于每个包只能确定自己的直接依赖，所以不存在锁间接依赖
+由于每个包只能确定自己的直接依赖，一个包的一个具体版本在 lockfile 中独一份，所以不存在锁间接依赖，和基于某个子 workspace 维度锁依赖 
 
-（否则就会造成多分身的问题，不过 pnpm 中 peer存在多分身，利用此 Hack 来确定间接依赖版本，可见我这个仓库 [SoonIter/pnpm-peer-trick](https://github.com/SoonIter/pnpm-peer-trick)）
+（否则就会造成多分身的问题，不过 pnpm 中 peer 存在多分身，利用此 Hack 来确定间接依赖版本，可见我这个仓库 [SoonIter/pnpm-peer-trick](https://github.com/SoonIter/pnpm-peer-trick)）
 
 ```json5
 // package.json
