@@ -8,7 +8,7 @@
 
 如 某个子 workspace 确定 react 的版本为
 
-```json
+```json5
 {
   "name": "a",
   "dependencies": {
@@ -27,7 +27,7 @@
 
 以 overrides 为例，pnpm 提供了以 `"a>b":"版本号"` 的方式来覆写 `package.json`
 
-```json
+```json5
 {
   "pnpm": {
     "overrides": {
@@ -64,7 +64,7 @@
 
 （否则就会造成多分身的问题，不过 pnpm 中 peer存在多分身，利用此 Hack 来确定间接依赖版本，可见我这个仓库 [SoonIter/pnpm-peer-trick](https://github.com/SoonIter/pnpm-peer-trick)）
 
-```json
+```json5
 // package.json
 "overrides": {
   "react>loose-envify>js-tokens": "8.0.0", // ❌
